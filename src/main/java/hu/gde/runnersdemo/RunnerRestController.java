@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.Model;
 
 import java.util.List;
 
@@ -70,6 +71,31 @@ public class RunnerRestController {
 
         public void setLapTimeSeconds(int lapTimeSeconds) {
             this.lapTimeSeconds = lapTimeSeconds;
+        }
+    }
+
+    //4. feladat REST végpont
+    @GetMapping("/getHighest")
+    public String getHighest(Model model)
+    {
+        List<RunnerEntity> runner = runnerRepository.findAll();
+        int maxHeight = 0;
+        String highestName = "";
+        if (runner != null)
+        {
+            for (RunnerEntity runnerE: runner)
+            {
+                if(maxHeight < runnerE.getHeight())
+                {
+                    maxHeight = runnerE.getHeight();
+                    highestName = runnerE.getRunnerName();
+                }
+            }
+            return highestName;
+        }
+        else
+        {
+            return "nincs futó";
         }
     }
 }
