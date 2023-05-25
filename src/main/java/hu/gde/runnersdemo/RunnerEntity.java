@@ -12,8 +12,6 @@ public class RunnerEntity {
     private String runnerName;
     private long averagePace;
 
-
-
     //1. feladat magasság hozzáadása
     private int height;
 

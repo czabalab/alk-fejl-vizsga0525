@@ -98,4 +98,6 @@ public class RunnerRestController {
             return "nincs futó";
         }
     }
+
+
 }
