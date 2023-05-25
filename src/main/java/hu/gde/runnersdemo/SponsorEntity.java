@@ -1,5 +1,6 @@
 package hu.gde.runnersdemo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,11 @@ public class SponsorEntity
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long sponsorId;
     private String sponsorName;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private RunnerEntity runner;
 
     @OneToMany(mappedBy = "runner", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SponsorEntity> sponsors = new ArrayList<>();
